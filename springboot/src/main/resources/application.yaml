@@ -1,0 +1,21 @@
+server:
+  port: 9090  # 服务端口配置
+
+# 数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 20030514
+    url: jdbc:mysql://localhost:3306/system?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+
+# 配置mybatis实体和xml映射
+mybatis:
+  configuration:
+# 将 MyBatis 执行的 SQL 语句和参数输出到控制台，便于调试和排查问题。
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 将数据库表中的下划线命名（如 user_name）自动映射为 Java 对象的驼峰命名（如 userName），避免手动编写别名或映射规则。
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+
+fileBaseUrl: http://localhost:${server.port}
