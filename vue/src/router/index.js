@@ -15,6 +15,9 @@ const router = createRouter({
         { path: 'person', meta: { name: '个人资料', requiresAuth: true }, component: () => import('@/views/manager/Person.vue') },
         { path: 'password', meta: { name: '修改密码', requiresAuth: true }, component: () => import('@/views/manager/Password.vue') },
         { path: 'teacher', meta: { name: '教师信息', requiresAuth: true }, component: () => import('@/views/manager/Teacher.vue') },
+        { path: 'project', meta: { name: '科研项目', requiresAuth: true }, component: () => import('@/views/manager/Project.vue') },
+        { path: 'process', meta: { name: '科研过程', requiresAuth: true }, component: () => import('@/views/manager/Process.vue') },
+        { path: 'type', meta: { name: '成果分类', requiresAuth: true }, component: () => import('@/views/manager/Type.vue') },
       ]
     },
     {

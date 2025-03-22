@@ -55,6 +55,9 @@ public class WebController {
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             adminService.updatePassword(account);
         }
+        if (RoleEnum.TEACHER.name().equals(account.getRole())) {
+            teacherService.updatePassword(account);
+        }
         return Result.success();
     }
 }

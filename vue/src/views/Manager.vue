@@ -56,11 +56,14 @@
               </el-icon>
               <span>信息管理</span>
             </template>
-            <el-menu-item index="/manager/notice">系统公告</el-menu-item>
+            <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
+            <el-menu-item index="/manager/project">科研项目管理</el-menu-item>
+            <el-menu-item index="/manager/type" v-if="data.user.role === 'ADMIN'">成果类型管理</el-menu-item>
+            <el-menu-item index="/manager/process">科研过程管理</el-menu-item>
 
           </el-sub-menu>
 
-          <el-sub-menu index="2">
+          <el-sub-menu index="2" v-if="data.user.role === 'ADMIN'">
             <template #title>
               <el-icon>
                 <Menu/>

@@ -7,6 +7,7 @@ public class Account {
     private String role;
     private String newPassword;
     private String token;
+    private Integer id;
 
     public String getUsername() {
         return username;
@@ -48,4 +49,11 @@ public class Account {
         this.token = token;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

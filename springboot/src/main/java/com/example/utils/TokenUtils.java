@@ -31,16 +31,16 @@ public class TokenUtils {
 
     @Resource
     private AdminService adminService;
-//    @Resource
-//    private TeacherService teacherService;
+    @Resource
+    private TeacherService teacherService;
 
     private static AdminService staticAdminService;
-//    private static TeacherService staticTeacherService;
+    private static TeacherService staticTeacherService;
 
     @PostConstruct
     public void init() {
         staticAdminService = adminService;
-//        staticTeacherService = teacherService;
+        staticTeacherService = teacherService;
     }
 
     /**
@@ -67,9 +67,9 @@ public class TokenUtils {
             if (RoleEnum.ADMIN.name().equals(role)) {
                 return staticAdminService.selectById(userId);
             }
-//            if (RoleEnum.TEACHER.name().equals(role)) {
-//                return staticTeacherService.selectById(userId);
-//            }
+            if (RoleEnum.TEACHER.name().equals(role)) {
+                return staticTeacherService.selectById(userId);
+            }
         } catch (Exception e) {
             log.error("获取当前登录用户出错", e);
         }

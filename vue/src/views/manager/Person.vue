@@ -49,18 +49,16 @@ const handleFileUpload = (res) => {
 
 const emit = defineEmits(['updateUser'])
 const update = () => {
-  if (data.user.role === 'ADMIN') {
-    request.put('/admin/update', data.user).then(res => {
-      if (res.code === '200') {
-        ElMessage.success('保存成功')
-        localStorage.setItem('xm-user', JSON.stringify(data.user))
-        // 在manger里定义@updateUser
-        emit('updateUser')
-      } else {
-        ElMessage.error(res.msg)
-      }
-    })
-  }
+  let url = data.user.role === 'ADMIN' ? '/admin/update' : '/teacher/update'
+  request.put(url, data.user).then(res => {
+    if (res.code === '200') {
+      ElMessage.success('保存成功')
+      localStorage.setItem('xm-user', JSON.stringify(data.user))
+      emit('updateUser')
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
 }
 
 </script>
