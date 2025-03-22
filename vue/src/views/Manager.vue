@@ -60,6 +60,9 @@
             <el-menu-item index="/manager/project">科研项目管理</el-menu-item>
             <el-menu-item index="/manager/type" v-if="data.user.role === 'ADMIN'">成果类型管理</el-menu-item>
             <el-menu-item index="/manager/process">科研过程管理</el-menu-item>
+            <el-menu-item index="/manager/achievement">科研成果管理</el-menu-item>
+            <el-menu-item index="/manager/TeacherFeedback" v-if="data.user.role === 'TEACHER'">教师反馈</el-menu-item>
+            <el-menu-item index="/manager/feedback" v-if="data.user.role === 'ADMIN'">教师反馈</el-menu-item>
 
           </el-sub-menu>
 

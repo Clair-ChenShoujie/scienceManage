@@ -18,6 +18,10 @@ const router = createRouter({
         { path: 'project', meta: { name: '科研项目', requiresAuth: true }, component: () => import('@/views/manager/Project.vue') },
         { path: 'process', meta: { name: '科研过程', requiresAuth: true }, component: () => import('@/views/manager/Process.vue') },
         { path: 'type', meta: { name: '成果分类', requiresAuth: true }, component: () => import('@/views/manager/Type.vue') },
+        { path: 'achievement', meta: { name: '科研成果', requiresAuth: true }, component: () => import('@/views/manager/Achievement.vue') },
+        { path: 'processLine', meta: { name: '科研时间线', requiresAuth: true }, component: () => import('@/views/manager/ProcessLine.vue') },
+        { path: 'teacherFeedback', meta: { name: '教师反馈', requiresAuth: true }, component: () => import('@/views/manager/TeacherFeedback.vue') },
+        { path: 'Feedback', meta: { name: '教师反馈', requiresAuth: true }, component: () => import('@/views/manager/Feedback.vue') },
       ]
     },
     {
