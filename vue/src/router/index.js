@@ -20,8 +20,11 @@ const router = createRouter({
         { path: 'type', meta: { name: '成果分类', requiresAuth: true }, component: () => import('@/views/manager/Type.vue') },
         { path: 'achievement', meta: { name: '科研成果', requiresAuth: true }, component: () => import('@/views/manager/Achievement.vue') },
         { path: 'processLine', meta: { name: '科研时间线', requiresAuth: true }, component: () => import('@/views/manager/ProcessLine.vue') },
-        { path: 'teacherFeedback', meta: { name: '教师反馈', requiresAuth: true }, component: () => import('@/views/manager/TeacherFeedback.vue') },
-        { path: 'Feedback', meta: { name: '教师反馈', requiresAuth: true }, component: () => import('@/views/manager/Feedback.vue') },
+        { path: 'teacherFeedback', meta: { name: '教师反馈提交', requiresAuth: true }, component: () => import('@/views/manager/TeacherFeedback.vue') },
+        { path: 'feedback', meta: { name: '教师反馈回复', requiresAuth: true }, component: () => import('@/views/manager/Feedback.vue') },
+        { path: 'activity', meta: { name: '学术活动管理', requiresAuth: true }, component: () => import('@/views/manager/Activity.vue') },
+        { path: 'teacherActivity', meta: { name: '学术活动管理', requiresAuth: true }, component: () => import('@/views/manager/TeacherActivity.vue') },
+        { path: 'apply', meta: { name: '我的申请', requiresAuth: true }, component: () => import('@/views/manager/Apply.vue') },
       ]
     },
     {
