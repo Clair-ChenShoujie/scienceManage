@@ -1,8 +1,10 @@
 package com.example.controller;
 
 import com.example.common.Result;
+import com.example.common.config.AutoLog;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.entity.Teacher;
 import com.example.service.AdminService;
 import com.example.service.TeacherService;
 import jakarta.annotation.Resource;
@@ -25,6 +27,7 @@ public class WebController {
         return Result.success();
     }
 
+    @AutoLog("登录系统")
     @PostMapping("/login")
     public Result login(@RequestBody Account account) {
         Account loginAccount = null;
@@ -37,13 +40,14 @@ public class WebController {
         return Result.success(loginAccount);
     }
 
-
+    @AutoLog("注册系统")
     @PostMapping("/register")
     public Result register(@RequestBody Account account) {
+        Teacher teacher = new Teacher();
         if (RoleEnum.TEACHER.name().equals(account.getRole())) {
-            teacherService.register(account);
+            teacher = teacherService.register(account);
         }
-        return Result.success();
+        return Result.success(teacher);
     }
 
 

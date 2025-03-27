@@ -25,6 +25,8 @@ const router = createRouter({
         { path: 'activity', meta: { name: '学术活动管理', requiresAuth: true }, component: () => import('@/views/manager/Activity.vue') },
         { path: 'teacherActivity', meta: { name: '学术活动管理', requiresAuth: true }, component: () => import('@/views/manager/TeacherActivity.vue') },
         { path: 'apply', meta: { name: '我的申请', requiresAuth: true }, component: () => import('@/views/manager/Apply.vue') },
+        { path: 'log', meta: { name: '日志管理', requiresAuth: true }, component: () => import('@/views/manager/Log.vue') },
+        { path: 'dashboard', meta: { name: '数据统计', requiresAuth: true }, component: () => import('@/views/manager/Dashboard.vue') },
       ]
     },
     {

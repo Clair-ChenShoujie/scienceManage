@@ -42,10 +42,13 @@
             :default-openeds="['1','2']"
             router>
           <el-menu-item index="/manager/home">
-            <el-icon>
-              <HomeFilled/>
-            </el-icon>
+            <el-icon><HomeFilled/></el-icon>
             <span>系统首页</span>
+          </el-menu-item>
+
+          <el-menu-item index="/manager/dashboard" v-if="data.user.role === 'ADMIN'">
+            <el-icon><Monitor /></el-icon>
+            <span>数据统计</span>
           </el-menu-item>
 
 
@@ -56,7 +59,6 @@
               </el-icon>
               <span>信息管理</span>
             </template>
-            <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
             <el-menu-item index="/manager/project">科研项目管理</el-menu-item>
             <el-menu-item index="/manager/type" v-if="data.user.role === 'ADMIN'">成果类型管理</el-menu-item>
             <el-menu-item index="/manager/process">科研过程管理</el-menu-item>
@@ -67,6 +69,8 @@
             <el-menu-item index="/manager/teacherActivity" v-if="data.user.role === 'TEACHER'">学术活动报名</el-menu-item>
             <el-menu-item index="/manager/apply" v-if="data.user.role === 'TEACHER'">我的活动申请</el-menu-item>
             <el-menu-item index="/manager/apply" v-if="data.user.role === 'ADMIN'">活动申请管理</el-menu-item>
+            <el-menu-item index="/manager/log" v-if="data.user.role === 'ADMIN'">操作日志管理</el-menu-item>
+            <el-menu-item index="/manager/notice" v-if="data.user.role === 'ADMIN'">系统公告</el-menu-item>
 
           </el-sub-menu>
 

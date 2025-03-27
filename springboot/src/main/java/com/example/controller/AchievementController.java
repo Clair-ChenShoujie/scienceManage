@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.common.Result;
+import com.example.common.config.AutoLog;
 import com.example.entity.Achievement;
 import com.example.service.AchievementService;
 import com.github.pagehelper.PageInfo;
@@ -86,6 +87,7 @@ public class AchievementController {
     /**
      * 分页查询
      */
+//    @AutoLog("分页查看学术成果")
     @GetMapping("/selectPage")
     public Result selectPage(Achievement achievement,
                              @RequestParam(defaultValue = "1") Integer pageNum,
