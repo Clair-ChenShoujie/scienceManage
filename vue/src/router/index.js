@@ -29,15 +29,15 @@ const router = createRouter({
         { path: 'dashboard', meta: { name: '数据统计', requiresAuth: true }, component: () => import('@/views/manager/Dashboard.vue') },
       ]
     },
-    {
-      path: '/front',
-      component: () => import('@/views/Front.vue'),
-      meta: {requiresAuth:true},
-      children: [
-        { path: 'home', meta: { requiresAuth: true }, component: () => import('@/views/front/Home.vue') },
-        { path: 'person', meta: { requiresAuth: true }, component: () => import('@/views/front/Person.vue') },
-      ]
-    },
+    // {
+    //   path: '/front',
+    //   component: () => import('@/views/Front.vue'),
+    //   meta: {requiresAuth:true},
+    //   children: [
+    //     { path: 'home', meta: { requiresAuth: true }, component: () => import('@/views/front/Home.vue') },
+    //     { path: 'person', meta: { requiresAuth: true }, component: () => import('@/views/front/Person.vue') },
+    //   ]
+    // },
     { path: '/login', meta: { requiresAuth: false }, component: () => import('@/views/Login.vue') },
     { path: '/register', meta: { requiresAuth: false }, component: () => import('@/views/Register.vue') },
     { path: '/404', meta: { requiresAuth: false }, component: () => import('@/views/404.vue') },

@@ -16,8 +16,8 @@
       </div>
 
       <div class="manager-header-right">
-        <el-dropdown style="cursor: pointer"> 
-          <div style="padding-right: 20px; display: flex; align-items: center">
+        <el-dropdown style="cursor: pointer">
+          <div style="padding-right: 20px; display: flex; align-items: center;">
             <img style="width: 40px; height: 40px; border-radius: 50%;" :src="data.user.avatar" alt="">
             <span style="margin-left: 5px;">{{ data.user.name }}</span><el-icon style="color: white;"><arrow-down /></el-icon>
           </div>
@@ -60,13 +60,13 @@
               <span>信息管理</span>
             </template>
             <el-menu-item index="/manager/project">科研项目管理</el-menu-item>
-            <el-menu-item index="/manager/type" v-if="data.user.role === 'ADMIN'">成果类型管理</el-menu-item>
-            <el-menu-item index="/manager/process">科研过程管理</el-menu-item>
-            <el-menu-item index="/manager/achievement">科研成果管理</el-menu-item>
-            <el-menu-item index="/manager/teacherFeedback" v-if="data.user.role === 'TEACHER'">教师反馈提交</el-menu-item>
-            <el-menu-item index="/manager/feedback" v-if="data.user.role === 'ADMIN'">教师反馈回复</el-menu-item>
-            <el-menu-item index="/manager/activity" v-if="data.user.role === 'ADMIN'">学术活动管理</el-menu-item>
-            <el-menu-item index="/manager/teacherActivity" v-if="data.user.role === 'TEACHER'">学术活动报名</el-menu-item>
+            <el-menu-item index="/manager/type" v-if="data.user.role === 'ADMIN'">科研成果类型</el-menu-item>
+            <el-menu-item index="/manager/process">项目过程记录</el-menu-item>
+            <el-menu-item index="/manager/achievement">科研成果内容</el-menu-item>
+            <el-menu-item index="/manager/teacherFeedback" v-if="data.user.role === 'TEACHER'">教师反馈模块</el-menu-item>
+            <el-menu-item index="/manager/feedback" v-if="data.user.role === 'ADMIN'">教师反馈模块</el-menu-item>
+            <el-menu-item index="/manager/activity" v-if="data.user.role === 'ADMIN'">科研活动管理</el-menu-item>
+            <el-menu-item index="/manager/teacherActivity" v-if="data.user.role === 'TEACHER'">科研活动报名</el-menu-item>
             <el-menu-item index="/manager/apply" v-if="data.user.role === 'TEACHER'">我的活动申请</el-menu-item>
             <el-menu-item index="/manager/apply" v-if="data.user.role === 'ADMIN'">活动申请管理</el-menu-item>
             <el-menu-item index="/manager/log" v-if="data.user.role === 'ADMIN'">操作日志管理</el-menu-item>

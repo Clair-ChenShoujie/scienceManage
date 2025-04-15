@@ -47,17 +47,17 @@
   })
   
   const formRef = ref()
-  
   const login = () => {
     formRef.value.validate(valid => {
       if (valid) { // 表示表单校验通过
-        
+
         request.post('/login', data.form).then(res => {
           if (res.code === '200') {
             ElMessage.success('登录成功')
             // 存储用户信息到浏览器的缓存
             localStorage.setItem('xm-user', JSON.stringify(res.data))
-            router.push('/manager/home')
+            // 通过直接操作 URL 强制刷新
+            window.location.href = '/manager/home'
           }
           else {
             ElMessage.error(res.msg)
@@ -66,6 +66,7 @@
       }
     })
   }
+
 
   </script>
   

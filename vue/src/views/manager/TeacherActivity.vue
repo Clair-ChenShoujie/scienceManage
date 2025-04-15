@@ -18,7 +18,24 @@
               </template>
             </el-popover>
           </div>
-          <div style="margin-top: 5px">活动地点：<span style="color: #666666">{{ item.location }}</span></div>
+
+          <div style="margin-top: 5px;">活动地点：
+            <el-popover
+                placement="top-start"
+                :width="250"
+                trigger="hover"
+                :content="item.location"
+            >
+              <template #reference>
+            <span
+                style="color: #666666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; max-width: 200px;"
+            >
+                {{ item.location }}
+            </span>
+              </template>
+            </el-popover>
+          </div>
+
           <div style="margin-top: 5px">活动日期：<span style="color: #666666">{{ item.start }} ~ {{ item.end }}</span></div>
           <div style="margin-top: 5px">活动状态：
             <el-tag v-if="item.status === '进行中'" type="success">{{ item.status }}</el-tag>

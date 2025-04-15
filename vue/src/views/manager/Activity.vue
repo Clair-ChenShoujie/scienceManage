@@ -130,6 +130,12 @@ const rules = reactive({
   content: [
     {required: true, message: '请输入活动描述', trigger: 'blur'},
   ],
+  start: [
+    {required: true, message: '请选择开始时间', trigger: 'blur'},
+  ],
+  end: [
+    {required: true, message: '请选择结束时间', trigger: 'blur'},
+  ],
 })
 
 const load = () => {

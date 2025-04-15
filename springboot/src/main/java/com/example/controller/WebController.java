@@ -27,7 +27,7 @@ public class WebController {
         return Result.success();
     }
 
-    @AutoLog("登录系统")
+//    @AutoLog("登录系统")
     @PostMapping("/login")
     public Result login(@RequestBody Account account) {
         Account loginAccount = null;
@@ -40,7 +40,7 @@ public class WebController {
         return Result.success(loginAccount);
     }
 
-    @AutoLog("注册系统")
+//    @AutoLog("注册系统")
     @PostMapping("/register")
     public Result register(@RequestBody Account account) {
         Teacher teacher = new Teacher();

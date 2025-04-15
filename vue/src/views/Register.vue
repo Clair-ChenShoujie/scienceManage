@@ -27,14 +27,14 @@
       </div>
     </div>
   </template>
-  
+
   <script setup>
   import { reactive, ref } from "vue";
   import { User, Lock } from "@element-plus/icons-vue";
   import request from "@/utils/request.js";
   import {ElMessage} from "element-plus";
   import router from "@/router/index.js";
-  
+
   const validatePass = (rule, value, callback) => {
   if (!value) {
     callback(new Error('请确认密码'))
@@ -60,9 +60,9 @@ const data = reactive({
     ]
   }
 })
-  
+
   const formRef = ref()
-  
+
   const login = () => {
     formRef.value.validate(valid => {
       if (valid) { // 表示表单校验通过
@@ -79,21 +79,37 @@ const data = reactive({
     })
   }
   </script>
-  
+
   <style scoped>
   .login-container {
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    width: 100vw;
+    /* 背景图片+渐变遮罩 */
+    background:
+        url('@/assets/imgs/注册背景.jpg') center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to top, #00467f, #a5cc82);
+    overflow: hidden;
   }
   .login-box {
-    width: 350px;
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.5);
+    width: 370px;
+    padding: 38px 32px 32px 32px;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px 0 rgba(0,0,0,0.18), 0 1.5px 8px rgba(0,0,0,0.10);
+    background: rgba(255,255,255,0.30);
+    backdrop-filter: blur(16px) saturate(1.6);
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  a {
+    color: #1450aa;
+    text-decoration: underline;
+  }
+  a:hover {
+    color: #00467f;
+  }
+  .el-button {
+    font-weight: bold;
+    letter-spacing: 2px;
   }
   </style>

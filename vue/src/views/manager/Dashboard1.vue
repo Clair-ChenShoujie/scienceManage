@@ -41,14 +41,14 @@
   </div>
 
   <div style="margin-top: 10px; display: flex">
-    <div id="wordcloud" style="flex: 1; margin-right: 5px; height: 400px" class="card"></div>
-    <div id="radar" style="flex: 1; margin-left: 5px; height: 400px" class="card"></div>
-  </div>
-  <div style="margin-top: 10px; display: flex">
-    <div id="heatmap" style="flex: 1; margin-right: 5px; height: 400px" class="card"></div>
-    <div id="line" style="flex: 1; margin-left: 5px; height: 400px" class="card"></div>
+    <div id="bar1" style="flex: 1; margin-right: 5px; height: 400px" class="card"></div>
+    <div id="pie" style="flex: 1; margin-left: 5px; height: 400px" class="card"></div>
   </div>
 
+  <div style="margin-top: 10px; display: flex">
+    <div id="bar2" style="flex: 1; margin-right: 5px; height: 400px" class="card"></div>
+    <div id="line" style="flex: 1; margin-left: 5px; height: 400px" class="card"></div>
+  </div>
 </template>
 
 <script setup>
@@ -57,7 +57,6 @@ import {reactive} from "vue";
 import request from "@/utils/request.js";
 import {ElMessage} from "element-plus";
 import * as echarts from "echarts";
-import 'echarts-wordcloud';
 import { onMounted } from "vue";
 
 
@@ -76,46 +75,43 @@ const loadBaseData = () => {
   })
 }
 
-const loadRadar = () => {
-  echarts.dispose(document.getElementById('radar'));
-  request.get('/dashboard/radar').then(res => {
+const loadPie = () => {
+  echarts.dispose(document.getElementById('pie'))
+  request.get('/dashboard/pie').then(res => {
     if (res.code === '200') {
-      let chartDom = document.getElementById('radar');
-      let myChart = echarts.init(chartDom);
-      radarOptions.radar.indicator = res.data.indicator.map(key => ({ name: key, max: Math.max(...res.data.values) + 2 }));
-      radarOptions.series[0].data[0].value = res.data.values;
-      myChart.setOption(radarOptions);
+      let chartDom = document.getElementById('pie')
+      let myChart = echarts.init(chartDom)
+      pieOptions.series[0].data = res.data
+      myChart.setOption(pieOptions)
     }
-  });
-};
+  })
+}
 
-const loadHeatmap = () => {
-  echarts.dispose(document.getElementById('heatmap'));
-  request.get('/dashboard/heatmap').then(res => {
+const loadBar1 = () => {
+  echarts.dispose(document.getElementById('bar1'))
+  request.get('dashboard/bar1').then(res => {
+    if (res.code === '200'){
+      let chartDom = document.getElementById('bar1')
+      let myChart = echarts.init(chartDom)
+      bar1Options.xAxis.data = res.data.xAxis
+      bar1Options.series[0].data = res.data.yAxis
+      myChart.setOption(bar1Options)
+    }
+  })
+}
+
+const loadBar2 = () => {
+  echarts.dispose(document.getElementById('bar2'))
+  request.get('/dashboard/bar2').then(res => {
     if (res.code === '200') {
-      let chartDom = document.getElementById('heatmap');
-      let myChart = echarts.init(chartDom);
-      heatmapOptions.xAxis.data = res.data.xAxis;
-      heatmapOptions.yAxis.data = res.data.yAxis;
-      heatmapOptions.series[0].data = res.data.data;
-      myChart.setOption(heatmapOptions);
+      let chartDom = document.getElementById('bar2')
+      let myChart = echarts.init(chartDom)
+      bar2Options.xAxis.data = res.data.xAxis
+      bar2Options.series[0].data = res.data.yAxis
+      myChart.setOption(bar2Options)
     }
-  });
-};
-
-const loadWordCloud = () => {
-  echarts.dispose(document.getElementById('wordcloud'));
-  request.get('/dashboard/wordCloud').then(res => {
-    if (res.code === '200') {
-      let chartDom = document.getElementById('wordcloud');
-      let myChart = echarts.init(chartDom);
-      wordCloudOptions.series[0].data = res.data;
-      myChart.setOption(wordCloudOptions);
-    }
-  });
-};
-
-
+  })
+}
 const loadLine = () => {
   echarts.dispose(document.getElementById('line'))
   request.get('/dashboard/line').then(res => {
@@ -128,115 +124,134 @@ const loadLine = () => {
     }
   })
 }
-
 loadBaseData()
 
 onMounted(() => {
-  loadRadar();
-  loadHeatmap();
-  loadWordCloud();
-  loadLine();
+  loadPie()
+  loadBar1()
+  loadBar2()
+  loadLine()
 });
-
 
 
 
   // 导入和响应式数据部分保持不变
 
-// 雷达图
-let radarOptions = {
+  // 更新后的图表选项
+  let pieOptions = {
   title: {
-    text: '项目等级分布（雷达图）',
-    left: 'center'
-  },
-  tooltip: {},
-  radar: {
-    indicator: [],
-    center: ['50%', '55%'],
-    radius: 120
-  },
-  series: [{
-    name: '项目数',
-    type: 'radar',
-    data: [
-      {
-        value: [],
-        name: '等级项目数'
-      }
-    ],
-    areaStyle: {
-      color: 'rgba(0,112,192,0.2)'
-    }
-  }]
+  text: '系统中不同等级的项目等级',
+  subtext: '统计维度：科研等级',
+  left: 'center'
+},
+  tooltip: {
+  trigger: 'item'
+},
+  legend: {
+  orient: 'vertical',
+  left: 'left'
+},
+  color: ['#cc3f5f', '#f27852', '#ffb750'],
+  series: [
+{
+  name: '占比数据',
+  type: 'pie',
+  radius: '50%',
+  data: [
+    { value: 1048, name: '一级', itemStyle: { color: '#262581' } },
+    { value: 735, name: '二级', itemStyle: { color: '#00bac0' } },
+    { value: 580, name: '三级', itemStyle: { color: '#0076be' } }
+  ],
+  emphasis: {
+  itemStyle: {
+  shadowBlur: 10,
+  shadowOffsetX: 0,
+  shadowColor: 'rgba(0, 0, 0, 0.5)'
 }
-
-
-// 词云图
-let wordCloudOptions = {
-  title: {
-    text: '科研成果类型词云',
-    left: 'center'
-  },
-  tooltip: {},
-  series: [{
-    type: 'wordCloud',
-    gridSize: 8,
-    sizeRange: [18, 60],
-    rotationRange: [-90, 90],
-    shape: 'circle',
-    width: '100%',
-    height: '100%',
-    textStyle: {
-      normal: {
-        color: function () {
-          return 'rgb(' + [Math.round(Math.random() * 160), Math.round(Math.random() * 160), Math.round(Math.random() * 160)].join(',') + ')';
-        }
-      }
-    },
-    data: []
-  }]
 }
+}
+  ]
+};
 
-
-// 热力图
-let heatmapOptions = {
+  // 柱状图1 - 学术活动数量
+  let bar1Options = {
   title: {
-    text: '教师-活动申请热力图',
-    left: 'center'
-  },
-  tooltip: {},
+  text: '系统中教师申请的学术活动数量',
+  subtext: '统计维度：活动名称',
+  left: 'center'
+},
+  color: ['#6B8EFF', '#7D9EFF', '#8FAEFF', '#A1BEFF', '#B3CEFF', '#C5DEFF'],
   xAxis: {
-    type: 'category',
-    data: [],
-    splitArea: { show: true }
-  },
+  type: 'category',
+  data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  axisLabel: {
+  interval: 0,
+  rotate: 15,
+  textStyle: {
+  color: '#666666',
+  fontSize: 10,
+}
+},
+},
   yAxis: {
-    type: 'category',
-    data: [],
-    splitArea: { show: true }
-  },
-  visualMap: {
-    min: 0,
-    max: 10,
-    calculable: true,
-    orient: 'horizontal',
-    left: 'center',
-    bottom: '5%'
-  },
-  series: [{
-    name: '申请次数',
-    type: 'heatmap',
-    data: [],
-    label: { show: true },
-    emphasis: {
-      itemStyle: {
-        shadowBlur: 10,
-        shadowColor: 'rgba(0,0,0,0.6)'
-      }
+  type: 'value'
+},
+  tooltip: {
+  trigger: 'item'
+},
+  series: [
+{
+  data: [120, 200, 150, 80, 70, 110, 130],
+  type: 'bar',
+  itemStyle: {
+    color: function(params) {
+      const colors = ['#6B8EFF', '#7D9EFF', '#8FAEFF', '#A1BEFF', '#B3CEFF', '#C5DEFF'];
+      return colors[params.dataIndex % colors.length];
     }
-  }]
+  }
+}
+  ]
 }
 
+  // 柱状图2 - 科研成果数
+  let bar2Options = {
+  title: {
+  text: '系统中不同成果类型下的科研成果数（柱状图）',
+  subtext: '统计维度：成果类型',
+  left: 'center'
+},
+  // color: ['#FF9E4F', '#4682B4', '#FFB482', '#5E9ED6', '#FFCA9E', '#76B1E5'],
+  xAxis: {
+  type: 'category',
+  data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  axisLabel: {
+  interval: 0,
+  rotate: 15,
+  textStyle: {
+  color: '#666666',
+  fontSize: 10
+}
+},
+},
+  yAxis: {
+  type: 'value'
+},
+  tooltip: {
+  trigger: 'item'
+},
+  series: [
+{
+  data: [120, 200, 150, 80, 70, 110, 130],
+  type: 'bar',
+  itemStyle: {
+  color: function(params) {
+    const colors = ['#193fa6', '#0061c0', '#007dc7', '#0096bd', '#00acab', '#12bf98'];
+    return colors[params.dataIndex % colors.length];
+  }
+}
+}
+  ]
+}
 
   // 折线图 - 反馈数量
   let lineOptions = {
