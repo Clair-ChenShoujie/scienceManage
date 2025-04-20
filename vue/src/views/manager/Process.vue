@@ -3,7 +3,7 @@
     <!-- 头部 Banner 区 -->
     <div class="header-banner">
       <div class="banner-content">
-        <img src="@/assets/imgs/alu.jpg" alt="科研过程管理" class="banner-img" />
+        <img src="@/assets/imgs/Cquptlogo.jpg" alt="科研过程管理" class="banner-img" />
         <div>
           <h2 class="banner-title">项目过程记录</h2>
           <p class="banner-desc">高效记录、追踪与分析科研项目进展，助力团队协作与创新。</p>

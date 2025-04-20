@@ -1,27 +1,42 @@
 <template>
   <div class="card" style="margin-bottom: 5px;">您好，{{ data.user?.name }}，欢迎使用本系统！</div>
-  <div style="display: flex; gap: 15px">
-    <!-- 左侧系统公告（美化后） -->
-    
-    <div class="card notice-container" style="flex: 1; max-height: 580px; overflow-y: auto; padding: 0 15px;">
-      <div class="notice-title">系统公告</div>
-      <el-timeline class="notice-timeline" :reverse="true" style="max-width: 100%;">
-        <el-timeline-item
-            v-for="(item, index) in data.noticeData"
-            :key="index"
-            :timestamp="item.time"
-            placement="top"
-            class="notice-timeline-item"
-        >
-          <div class="notice-content">
-            <p>{{ item.content }}</p>
-          </div>
-        </el-timeline-item>
-      </el-timeline>
+  <div class="container">
+    <!-- 左侧：logo+公告（上下结构） -->
+    <div class="left-panel">
+      <!-- logo板块 -->
+      <div class="project-banner">
+        <img src="@/assets/imgs/Cquptlogo.jpg"
+             class="banner-img" alt="科研项目"/>
+        <div class="banner-content">
+          <h1>
+            <el-icon style="color:#4f8eff; vertical-align: middle;"><View /></el-icon>
+            科研项目管理系统
+          </h1>
+          <p>赋能创新，助力科研，轻松管理您的学术项目</p>
+        </div>
+      </div>
+
+      <!-- 公告 -->
+      <div class="card notice-container">
+        <div class="notice-title">系统公告</div>
+        <el-timeline class="notice-timeline" :reverse="true" style="max-width: 100%;">
+          <el-timeline-item
+              v-for="(item, index) in data.noticeData"
+              :key="index"
+              :timestamp="item.time"
+              placement="top"
+              class="notice-timeline-item"
+          >
+            <div class="notice-content">
+              <p>{{ item.content }}</p>
+            </div>
+          </el-timeline-item>
+        </el-timeline>
+      </div>
     </div>
 
-    <!-- 右侧科研资讯（保持不变） -->
-    <div class="card" style="flex: 1; max-height: 580px; overflow: auto; padding: 0">
+    <!-- 右侧科研资讯 -->
+    <div class="card research-news-panel">
       <div style="font-weight: bold; color: #143281; font-size: 18px; padding: 15px 20px; position: sticky; top: 0; background: white; z-index: 1; border-bottom: 1px solid #eee">科研资讯</div>
       <div style="padding: 10px">
         <el-scrollbar>
@@ -77,13 +92,64 @@
   </el-dialog>
 </template>
 
-
 <style scoped>
+.container {
+  display: flex;
+  gap: 15px;
+  /* 可选: 让两侧等高 */
+  align-items: stretch;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1 1 350px;
+  max-width: 450px;
+  min-width: 320px;
+}
+
+.project-banner {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 0.07);
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  margin-bottom: 0;
+}
+
+.banner-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-right: 18px;
+}
+
+.banner-content h1 {
+  font-size: 22px;
+  margin: 0 0 6px 0;
+  color: #303133;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.banner-content p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
 .notice-container {
   background: #fff;
   border-radius: 6px;
   box-shadow: 0 4px 15px rgb(0 0 0 / 0.07);
   padding-top: 10px;
+  flex: 1;
+  max-height: 450px;
+  overflow-y: auto;
+  padding: 0 15px;
 }
 
 .notice-title {
@@ -121,6 +187,16 @@
   background-color: #dbeafe;
 }
 
+.research-news-panel {
+  flex: 2 1 600px;
+  max-height: 580px;
+  overflow: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 研究新闻内容不变 */
 .news-card {
   background: white;
   border-radius: 4px;
@@ -129,18 +205,31 @@
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
   transition: all 0.3s;
 }
-
 .news-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
 }
-
 .card {
   background: white;
   border-radius: 4px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
 }
+
+/* 响应式 */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .left-panel, .research-news-panel {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .left-panel {
+    flex-direction: column;
+  }
+}
 </style>
+
 
 
 <script setup>
