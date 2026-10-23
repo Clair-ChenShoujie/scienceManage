@@ -1,90 +1,113 @@
-# 科研管理系统 · ScienceManage
+# 高校科研管理系统
 
-基于 **Vue 3 + Spring Boot 3** 的前后端分离科研管理系统，面向管理员和教师，提供科研项目、过程记录、成果归档与学术活动管理等功能。
+这是我用 Vue 3 和 Spring Boot 做的一个高校科研管理系统。项目围绕教师的科研工作展开，把项目申报、过程记录、成果管理和学术活动放在同一个系统里，也提供了管理员审核、公告发布和数据统计等功能。
 
-## 页面截图
+系统分为管理员端和教师端。教师可以提交科研项目、记录研究进展、整理成果、报名参加活动；管理员负责项目审核、信息维护、活动管理和反馈回复。
 
-以下截图来自本地运行的真实页面。管理员和教师账号均已验证登录，业务截图展示当前数据库中的数据。
+## 功能与界面
 
-### 登录
-![登录页面](docs/screenshots/login.png)
+### 登录与注册
 
-### 注册
-![注册页面](docs/screenshots/register.png)
+登录时可以选择管理员或教师身份，进入系统后显示对应的菜单。
 
-## 业务页面
+![登录](docs/screenshots/login.png)
 
-### 管理员 · 数据统计
+![注册](docs/screenshots/register.png)
 
-汇总科研项目、成果、活动和教师数量，并通过词云、雷达图等图表展示科研数据。
+### 系统首页
 
-![管理员数据统计](docs/screenshots/admin-dashboard.png)
+首页放了系统公告和科研资讯，登录后可以先了解近期通知，再进入具体的业务页面。
 
-### 教师 · 系统首页
+![教师首页](docs/screenshots/teacher-home.png)
 
-查看系统公告和科研资讯，通过侧边栏进入项目、成果、反馈和活动申请模块。
+### 科研项目
 
-![教师系统首页](docs/screenshots/teacher-home.png)
+项目管理记录了项目编号、名称、来源、等级、学科、预算和起止时间等信息。教师提交项目后，可以查看审核状态；管理员在同一个模块中查看和审核项目。
 
-### 教师 · 科研时间线
+![科研项目管理](docs/screenshots/admin-project.png)
 
-按日期展示科研过程中的工作内容、遇到的问题和解决方案。
+### 科研过程与时间线
 
-![教师科研时间线](docs/screenshots/teacher-processLine.png)
+除了项目本身，我也做了过程记录。教师可以把每个阶段的工作内容、遇到的问题和解决方案记下来，再按时间线查看，方便回顾整个研究过程。
 
-## 功能
+![科研过程记录](docs/screenshots/teacher-process.png)
 
-| 模块 | 功能说明 |
-| --- | --- |
-| 账户与个人中心 | 登录、注册、个人资料维护、密码修改 |
-| 人员管理 | 管理员信息、教师信息管理 |
-| 科研项目 | 项目信息管理，科研过程记录与科研时间线 |
-| 科研成果 | 成果分类维护、科研成果管理 |
-| 学术活动 | 活动管理、教师活动页面与我的申请 |
-| 沟通与公告 | 系统公告、教师反馈提交和反馈回复 |
-| 数据统计 | 数据统计页面，使用 ECharts 展示数据 |
-| 系统管理 | 日志管理、文件上传与访问 |
+![科研时间线](docs/screenshots/teacher-processLine.png)
 
-## 技术栈
+### 科研成果
 
-- 前端：Vue 3、Vite 6、Vue Router 4、Element Plus、Axios、ECharts。
-- 后端：Java 17、Spring Boot 3.4.2、MyBatis、PageHelper、JWT、Spring AOP。
-- 数据库：MySQL；项目附带 `springboot/system.sql` 数据脚本。
+成果管理用于整理论文、专利等科研产出，成果类型可以单独维护，方便分类查看。
 
-## 项目结构
+![科研成果](docs/screenshots/admin-achievement.png)
+
+![成果分类](docs/screenshots/admin-type.png)
+
+### 学术活动
+
+系统支持学术会议、讲座、论坛、竞赛和研讨会等活动。管理员维护活动信息，教师报名后可以在“我的申请”中查看申请记录。
+
+![学术活动管理](docs/screenshots/admin-activity.png)
+
+![教师活动报名](docs/screenshots/teacher-teacherActivity.png)
+
+![我的活动申请](docs/screenshots/teacher-apply.png)
+
+### 教师反馈
+
+教师可以提交使用反馈和建议，管理员在后台查看并回复，保留每次反馈的处理记录。
+
+![教师反馈与回复](docs/screenshots/admin-feedback.png)
+
+### 系统公告
+
+管理员发布和维护公告，教师可以在首页查看通知。
+
+![系统公告](docs/screenshots/admin-notice.png)
+
+### 数据统计
+
+统计页汇总了科研项目、成果、活动和教师数量。我用 ECharts 做了成果类型词云、项目等级雷达图、活动申请热力图和反馈趋势图，方便从整体上查看系统里的科研数据。
+
+![数据统计](docs/screenshots/admin-dashboard.png)
+
+此外，系统还包括教师反馈与回复、管理员和教师信息管理、个人资料修改、密码修改、文件上传和操作日志。
+
+## 技术实现
+
+前端使用 Vue 3 和 Vite，页面组件主要用 Element Plus，路由由 Vue Router 管理，通过 Axios 请求后端接口，统计图表使用 ECharts。
+
+后端使用 Java 17 和 Spring Boot 3.4.2，使用 MyBatis 操作 MySQL，PageHelper 处理分页，JWT 用于身份认证，Spring AOP 用于操作日志记录。
+
+## 目录结构
 
 ```text
 system/
-├── vue/                 # Vue 前端
-│   └── src/views/       # 登录、注册及管理端页面
-├── springboot/          # Spring Boot 后端
-│   ├── src/main/java/   # 接口与业务实现
-│   ├── src/main/resources/ # 配置和 MyBatis 映射
-│   └── system.sql       # 数据库脚本
-├── files/               # 文件资源
-└── docs/screenshots/    # README 页面截图
+├── vue/                       # 前端
+│   └── src/views/             # 登录、注册和管理页面
+├── springboot/                # 后端
+│   ├── src/main/java/         # 接口、业务逻辑和数据访问
+│   ├── src/main/resources/    # 配置文件和 MyBatis 映射
+│   └── system.sql             # 数据库脚本
+├── files/                     # 文件资源
+└── docs/screenshots/          # 项目截图
 ```
 
 ## 本地运行
 
-准备 Java 17、Maven、MySQL，以及支持 Vite 6 的 Node.js（可使用 Node.js 22）和 npm。
+需要准备 Java 17、Maven、MySQL、Node.js 22 和 npm。
 
-### 1. 初始化数据库
+先创建 `system` 数据库，导入 `springboot/system.sql`，再修改 `springboot/src/main/resources/application.yaml` 中的数据库地址、用户名和密码。
 
-创建名为 `system` 的 MySQL 数据库，再使用 MySQL 客户端导入 `springboot/system.sql`。导入前检查脚本内容，并使用独立的开发数据库。
-
-修改 `springboot/src/main/resources/application.yaml` 中的数据库连接地址、用户名和密码。后端默认监听 `9090` 端口。
-
-### 2. 启动后端
+启动后端：
 
 ```bash
 cd springboot
 mvn spring-boot:run
 ```
 
-### 3. 启动前端
+后端默认端口为 `9090`。文件接口从后端启动目录下的 `files/` 读取资源，运行时需要把项目中的文件资源放到对应目录。
 
-在另一个终端执行：
+另开一个终端启动前端：
 
 ```bash
 cd vue
@@ -92,21 +115,16 @@ npm ci
 npm run dev
 ```
 
-打开 Vite 在终端输出的本地地址。开发环境接口地址在 `vue/.env.development` 中配置，默认连接 `http://localhost:9090`。
+打开终端中显示的本地地址即可。开发环境的接口地址配置在 `vue/.env.development` 中，默认为 `http://localhost:9090`。
 
-### 4. 构建
+## 打包部署
 
 ```bash
-# 前端（在 vue 目录）
+# 在 vue 目录执行
 npm run build
 
-# 后端（在 springboot 目录）
+# 在 springboot 目录执行
 mvn clean package
 ```
 
-前端部署前检查 `.env.production` 的接口地址；使用浏览器历史路由时，需要配置服务器将前端页面请求回退到 `index.html`。文件访问地址可通过后端的 `fileBaseUrl` 配置调整。
-
-## 说明
-
-功能说明依据仓库中的页面路由、接口与依赖整理。业务页面需要后端和数据库正常运行；已验证管理员和教师登录及本文所示业务页面的数据展示，尚未完成新增、修改、审批等全部业务流程测试。部分账号头像资源未能加载；项目管理页面在本次本地预览中出现白屏，未纳入截图。
-
+部署前修改 `vue/.env.production` 中的接口地址，以及后端的数据库和 `fileBaseUrl` 配置。前端使用 History 路由，需要在 Web 服务器上配置回退到 `index.html`。
